@@ -35,3 +35,13 @@ For Plug
 Plug 'scrooloose/nerdtree'
 Plug 'MarSoft/nerdtree-grep-plugin'
 ```
+
+
+## How to use ripgrep
+Add the following to your Vim config to use [ripgrep](https://github.com/BurntSushi/ripgrep):
+```
+if executable("rg")
+    set grepprg=rg\ --vimgrep\ --no-heading\ --follow
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+```

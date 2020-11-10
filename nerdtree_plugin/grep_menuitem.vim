@@ -35,8 +35,11 @@ function! NERDTreeGrep()
 
     try
         exec 'silent cd ' . dirnode.path.str()
-        exec 'silent grep -rn ' . pattern . ' .'
-        " exec 'silent grep -rn ' . pattern . ' ' . dirnode.path.str()
+        if &grepprg =~ "^grep "
+            exec 'silent grep -r ' . pattern . ' .'
+        else
+            exec 'silent grep ' . pattern . ' .'
+        endif
     finally
         let &shellpipe = old_shellpipe
     endtry
@@ -46,7 +49,6 @@ function! NERDTreeGrep()
         echo "No hits"
     elseif hits > 1
         copen
-        " echo "Multiple hits. Jumping to first, use :copen to see them all."
     endif
 
 endfunction
